@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Kalkulator Gadai</title>
+<meta name="theme-color" content="#092328">
+<title>Kalkulator Gadai - PT. Gadai Ogan Baru</title>
 
 <style>
 :root {
@@ -18,9 +18,7 @@
     --red: #D9534F;
 }
 
-* {
-    box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
 body {
     margin: 0;
@@ -79,9 +77,7 @@ body {
     margin: 0 0 18px;
 }
 
-.form-group {
-    margin-bottom: 17px;
-}
+.form-group { margin-bottom: 17px; }
 
 label {
     display: block;
@@ -90,8 +86,7 @@ label {
     margin-bottom: 8px;
 }
 
-input,
-select {
+input, select {
     width: 100%;
     min-height: 46px;
     padding: 12px;
@@ -104,8 +99,7 @@ select {
     outline: none;
 }
 
-input:focus,
-select:focus {
+input:focus, select:focus {
     border-color: var(--teal);
     box-shadow: 0 0 0 3px rgba(36, 157, 143, 0.10);
 }
@@ -144,13 +138,8 @@ button {
     color: var(--dark);
 }
 
-.result-card {
-    display: none;
-}
-
-.result-card.show {
-    display: block;
-}
+.result-card { display: none; }
+.result-card.show { display: block; }
 
 .total-box {
     background: var(--dark);
@@ -190,19 +179,19 @@ button {
     line-height: 1.5;
 }
 
-.detail-row:last-child {
-    border-bottom: none;
-}
+.detail-row:last-child { border-bottom: none; }
 
 .detail-row .name {
     color: var(--muted);
     flex: 1;
+    min-width: 0;
 }
 
 .detail-row .value {
     text-align: right;
     font-weight: bold;
     overflow-wrap: anywhere;
+    max-width: 62%;
 }
 
 .warning {
@@ -228,9 +217,7 @@ button {
     margin-top: 12px;
 }
 
-.error.show {
-    display: block;
-}
+.error.show { display: block; }
 
 footer {
     text-align: center;
@@ -240,28 +227,17 @@ footer {
     line-height: 1.7;
 }
 
-footer strong {
-    color: var(--dark);
-}
+footer strong { color: var(--dark); }
 
 @media (max-width: 360px) {
-    .card {
-        padding: 16px;
-    }
-
-    .total-value {
-        font-size: 23px;
-    }
-
-    .header h1 {
-        font-size: 21px;
-    }
+    .card { padding: 16px; }
+    .total-value { font-size: 23px; }
+    .header h1 { font-size: 21px; }
 }
 </style>
 </head>
 
 <body>
-
 <div class="container">
 
     <header class="header">
@@ -284,23 +260,16 @@ footer strong {
 
         <div class="form-group">
             <label for="pokok">Pokok Pinjaman (Rp)</label>
-            <input
-                type="text"
-                id="pokok"
-                inputmode="numeric"
-                placeholder="Contoh: 3.500.000"
-                autocomplete="off"
-            >
-            <div class="helper">
-                Masukkan nominal pokok pinjaman.
-            </div>
+            <input type="text" id="pokok" inputmode="numeric"
+                   placeholder="Contoh: 3.500.000" autocomplete="off">
+            <div class="helper">Masukkan nominal pokok pinjaman.</div>
         </div>
 
         <div class="form-group">
-            <label for="tenor">Jenis Gadai</label>
+            <label for="tenor">Masa Gadai</label>
             <select id="tenor">
-                <option value="15">Gadai 15 Hari — Bunga 5%</option>
-                <option value="30">Gadai 30 Hari — Bunga 10%</option>
+                <option value="15">15 Hari — Bunga 5%</option>
+                <option value="30">30 Hari — Bunga 10%</option>
             </select>
         </div>
 
@@ -308,7 +277,7 @@ footer strong {
             <label for="tanggalGadai">Tanggal Gadai</label>
             <input type="date" id="tanggalGadai">
             <div class="helper">
-                Khusus gadai baru, jatuh tempo dihitung dari tanggal gadai.
+                Jatuh tempo dihitung berdasarkan tanggal gadai dan masa gadai.
             </div>
         </div>
 
@@ -320,9 +289,7 @@ footer strong {
         <div class="form-group" id="tanggalTransaksiGroup" style="display:none">
             <label for="tanggalTransaksi">Tanggal Transaksi</label>
             <input type="date" id="tanggalTransaksi">
-            <div class="helper">
-                Gunakan tanggal transaksi tebus atau perpanjang.
-            </div>
+            <div class="helper">Tanggal nasabah melakukan transaksi.</div>
         </div>
 
         <div class="button-row">
@@ -334,7 +301,7 @@ footer strong {
             </button>
         </div>
 
-        <div id="error" class="error"></div>
+        <div id="error" class="error" role="alert"></div>
     </section>
 
     <section class="card result-card" id="resultCard">
@@ -350,8 +317,8 @@ footer strong {
 
         <div class="warning">
             <strong>Catatan:</strong>
-            Total dalam rincian ini hanya estimasi. Silakan lakukan verifikasi
-            di outlet untuk pengecekan lebih lanjut.
+            Total ini merupakan estimasi. Verifikasi perhitungan dan
+            ketentuan resmi di outlet sebelum menerima pembayaran.
         </div>
     </section>
 
@@ -359,8 +326,7 @@ footer strong {
         Alat bantu estimasi • Pastikan perhitungan sesuai ketentuan outlet.
         <br><br>
         Copyright &copy; 2026 <strong>Elika Creative</strong>
-        <br>
-        All Rights Reserved.
+        <br>All Rights Reserved.
     </footer>
 
 </div>
@@ -399,12 +365,18 @@ function parseTanggal(nilai) {
     if (!nilai) return null;
 
     const bagian = nilai.split("-").map(Number);
+    if (bagian.length !== 3 || bagian.some(Number.isNaN)) return null;
 
-    if (bagian.length !== 3 || bagian.some(Number.isNaN)) {
-        return null;
-    }
+    const tanggal = new Date(bagian[0], bagian[1] - 1, bagian[2]);
 
-    return new Date(bagian[0], bagian[1] - 1, bagian[2]);
+    // Mencegah tanggal tidak valid, misalnya 31 Februari.
+    if (
+        tanggal.getFullYear() !== bagian[0] ||
+        tanggal.getMonth() !== bagian[1] - 1 ||
+        tanggal.getDate() !== bagian[2]
+    ) return null;
+
+    return tanggal;
 }
 
 function tanggalLokalHariIni() {
@@ -423,13 +395,13 @@ function tambahHari(tanggal, jumlahHari) {
 }
 
 function selisihHari(tanggalAwal, tanggalAkhir) {
-    const awal = new Date(
+    const awal = Date.UTC(
         tanggalAwal.getFullYear(),
         tanggalAwal.getMonth(),
         tanggalAwal.getDate()
     );
 
-    const akhir = new Date(
+    const akhir = Date.UTC(
         tanggalAkhir.getFullYear(),
         tanggalAkhir.getMonth(),
         tanggalAkhir.getDate()
@@ -439,21 +411,30 @@ function selisihHari(tanggalAwal, tanggalAkhir) {
 }
 
 function barisRincian(nama, nilai) {
-    return `
-        <div class="detail-row">
-            <div class="name">${nama}</div>
-            <div class="value">${nilai}</div>
-        </div>
-    `;
+    const baris = document.createElement("div");
+    baris.className = "detail-row";
+
+    const label = document.createElement("div");
+    label.className = "name";
+    label.textContent = nama;
+
+    const value = document.createElement("div");
+    value.className = "value";
+    value.textContent = nilai;
+
+    baris.appendChild(label);
+    baris.appendChild(value);
+
+    return baris;
 }
 
-// Format otomatis nominal menggunakan titik ribuan.
+function tambahRincian(kontainer, nama, nilai) {
+    kontainer.appendChild(barisRincian(nama, nilai));
+}
+
 pokokInput.addEventListener("input", function () {
     const angka = this.value.replace(/\D/g, "");
-
-    this.value = angka
-        ? Number(angka).toLocaleString("id-ID")
-        : "";
+    this.value = angka ? Number(angka).toLocaleString("id-ID") : "";
 });
 
 function ubahTransaksi() {
@@ -468,9 +449,13 @@ function ubahTransaksi() {
     resultCard.classList.remove("show");
 
     if (gadaiBaru) {
-        tanggalGadaiInput.value = tanggalLokalHariIni();
+        if (!tanggalGadaiInput.value) {
+            tanggalGadaiInput.value = tanggalLokalHariIni();
+        }
     } else {
-        tanggalTransaksiInput.value = tanggalLokalHariIni();
+        if (!tanggalTransaksiInput.value) {
+            tanggalTransaksiInput.value = tanggalLokalHariIni();
+        }
     }
 }
 
@@ -487,7 +472,7 @@ function hitung() {
     const tenor = Number(tenorInput.value);
     const jenis = transaksiInput.value;
 
-    if (!pokok || pokok <= 0) {
+    if (!Number.isSafeInteger(pokok) || pokok <= 0) {
         tampilkanError("Masukkan nominal pokok pinjaman yang valid.");
         return;
     }
@@ -496,82 +481,49 @@ function hitung() {
     const bunga = Math.round(pokok * bungaPersen);
 
     let total = 0;
-    let rincian = "";
     let totalLabel = "";
     let totalNote = "";
-    let tanggalTransaksi;
-    let jatuhTempo;
-    let keterlambatan = 0;
-    let dendaHari = 0;
-    let denda = 0;
+
+    const detail = document.getElementById("detail");
+    detail.replaceChildren();
 
     // ==========================================
     // GADAI BARU
     // ==========================================
     if (jenis === "gadai") {
-        tanggalTransaksi = parseTanggal(tanggalGadaiInput.value);
+        const tanggalGadai = parseTanggal(tanggalGadaiInput.value);
 
-        if (!tanggalTransaksi) {
-            tampilkanError("Silakan isi tanggal gadai.");
+        if (!tanggalGadai) {
+            tampilkanError("Silakan isi tanggal gadai yang valid.");
             return;
         }
 
-        jatuhTempo = tambahHari(tanggalTransaksi, tenor);
-
+        const jatuhTempo = tambahHari(tanggalGadai, tenor);
         const terimaBersih = pokok - bunga - ADMIN;
 
         if (terimaBersih < 0) {
             tampilkanError(
-                "Pokok pinjaman terlalu kecil untuk menutupi potongan bunga dan administrasi."
+                "Pokok pinjaman terlalu kecil untuk menutupi bunga dan administrasi."
             );
             return;
         }
 
         total = terimaBersih;
         totalLabel = "Uang Bersih yang Diterima";
-        totalNote =
-            "Nominal terima bersih setelah dikurangi bunga " +
-            "dan biaya administrasi.";
+        totalNote = "Estimasi setelah potongan bunga dan administrasi.";
 
-        rincian += barisRincian(
-            "Jenis Transaksi",
-            "Gadai Baru"
-        );
-
-        rincian += barisRincian(
-            "Pokok Pinjaman",
-            formatRupiah(pokok)
-        );
-
-        rincian += barisRincian(
-            "Tanggal Gadai",
-            formatTanggal(tanggalTransaksi)
-        );
-
-        rincian += barisRincian(
-            "Tenor Gadai",
-            tenor + " hari"
-        );
-
-        rincian += barisRincian(
+        tambahRincian(detail, "Jenis Transaksi", "Gadai Baru");
+        tambahRincian(detail, "Pokok Pinjaman", formatRupiah(pokok));
+        tambahRincian(detail, "Tanggal Gadai", formatTanggal(tanggalGadai));
+        tambahRincian(detail, "Masa Gadai", tenor + " hari kalender");
+        tambahRincian(
+            detail,
             "Potongan Bunga (" + (bungaPersen * 100) + "%)",
             "− " + formatRupiah(bunga)
         );
-
-        rincian += barisRincian(
-            "Biaya Administrasi",
-            "− " + formatRupiah(ADMIN)
-        );
-
-        rincian += barisRincian(
-            "TERIMA BERSIH",
-            formatRupiah(terimaBersih)
-        );
-
-        rincian += barisRincian(
-            "Tanggal Jatuh Tempo",
-            formatTanggal(jatuhTempo)
-        );
+        tambahRincian(detail, "Biaya Administrasi", "− " + formatRupiah(ADMIN));
+        tambahRincian(detail, "TERIMA BERSIH", formatRupiah(terimaBersih));
+        tambahRincian(detail, "Tanggal Jatuh Tempo", formatTanggal(jatuhTempo));
     }
 
     // ==========================================
@@ -579,157 +531,259 @@ function hitung() {
     // ==========================================
     else {
         const jatuhTempoAwal = parseTanggal(jatuhTempoInput.value);
-        tanggalTransaksi = parseTanggal(tanggalTransaksiInput.value);
+        const tanggalTransaksi = parseTanggal(tanggalTransaksiInput.value);
 
         if (!jatuhTempoAwal || !tanggalTransaksi) {
             tampilkanError(
-                "Silakan isi tanggal jatuh tempo dan tanggal transaksi."
+                "Silakan isi tanggal jatuh tempo dan tanggal transaksi yang valid."
             );
             return;
         }
 
-        jatuhTempo = jatuhTempoAwal;
-
-        keterlambatan = Math.max(
+        const terlambat = Math.max(
             0,
             selisihHari(jatuhTempoAwal, tanggalTransaksi)
         );
 
+        // ======================================
+        // PERPANJANGAN: MASIH MENGIKUTI KODE LAMA
+        // ======================================
         if (jenis === "perpanjang") {
-            dendaHari = keterlambatan;
-            denda = dendaHari * DENDA_PER_HARI;
-            total = bunga + denda;
-
-            // Jatuh tempo berikutnya dihitung dari jatuh tempo lama.
+            const dendaHari = terlambat;
+            const denda = dendaHari * DENDA_PER_HARI;
             const jatuhTempoBaru = tambahHari(jatuhTempoAwal, tenor);
 
+            total = bunga + denda;
             totalLabel = "Total Estimasi Perpanjangan";
             totalNote =
-                "Pembayaran perpanjangan terdiri dari bunga " +
-                "dan denda keterlambatan jika ada. Pokok pinjaman belum dibayar.";
+                "Bunga dan denda keterlambatan jika ada. " +
+                "Pokok pinjaman belum dibayar.";
 
-            rincian += barisRincian(
-                "Jenis Transaksi",
-                "Perpanjang Gadai"
-            );
-
-            rincian += barisRincian(
-                "Pokok Pinjaman",
-                formatRupiah(pokok)
-            );
-
-            rincian += barisRincian(
+            tambahRincian(detail, "Jenis Transaksi", "Perpanjang Gadai");
+            tambahRincian(detail, "Pokok Pinjaman", formatRupiah(pokok));
+            tambahRincian(
+                detail,
                 "Bunga (" + (bungaPersen * 100) + "%)",
                 formatRupiah(bunga)
             );
-
-            rincian += barisRincian(
+            tambahRincian(
+                detail,
                 "Jatuh Tempo Saat Ini",
                 formatTanggal(jatuhTempoAwal)
             );
-
-            rincian += barisRincian(
+            tambahRincian(
+                detail,
                 "Tanggal Transaksi",
                 formatTanggal(tanggalTransaksi)
             );
-
-            rincian += barisRincian(
-                "Hari Keterlambatan",
-                keterlambatan + " hari"
-            );
-
-            rincian += barisRincian(
+            tambahRincian(detail, "Hari Keterlambatan", terlambat + " hari");
+            tambahRincian(
+                detail,
                 "Denda (" + dendaHari + " × Rp10.000)",
                 formatRupiah(denda)
             );
-
-            rincian += barisRincian(
+            tambahRincian(
+                detail,
                 "Jatuh Tempo Berikutnya",
                 formatTanggal(jatuhTempoBaru)
             );
-        } else {
-            const ambangHari = tenor === 15 ? 10 : 15;
-            let bungaTambahan = 0;
-
-            if (keterlambatan > ambangHari) {
-                bungaTambahan = bunga;
-            }
-
-            // Pokok di bawah Rp3 juta:
-            // denda dihitung dari seluruh hari keterlambatan.
-            //
-            // Pokok Rp3 juta atau lebih:
-            // denda dihitung setelah melewati ambang hari.
-            if (pokok < 3000000) {
-                dendaHari = keterlambatan;
-            } else if (keterlambatan > ambangHari) {
-                dendaHari = keterlambatan - ambangHari;
-            }
-
-            denda = dendaHari * DENDA_PER_HARI;
-            total = pokok + bungaTambahan + denda;
-
-            totalLabel = "Total Estimasi Tebus";
-            totalNote =
-                "Total tebus terdiri dari pokok pinjaman, " +
-                "bunga yang dikenakan sesuai aturan, dan denda jika ada.";
-
-            rincian += barisRincian(
-                "Jenis Transaksi",
-                "Tebus Gadai"
-            );
-
-            rincian += barisRincian(
-                "Pokok Pinjaman",
-                formatRupiah(pokok)
-            );
-
-            rincian += barisRincian(
-                "Bunga Dasar (" + (bungaPersen * 100) + "%)",
-                formatRupiah(bunga)
-            );
-
-            rincian += barisRincian(
-                "Bunga yang Dikenakan",
-                formatRupiah(bungaTambahan)
-            );
-
-            rincian += barisRincian(
-                "Jatuh Tempo Saat Ini",
-                formatTanggal(jatuhTempoAwal)
-            );
-
-            rincian += barisRincian(
-                "Tanggal Transaksi",
-                formatTanggal(tanggalTransaksi)
-            );
-
-            rincian += barisRincian(
-                "Hari Keterlambatan",
-                keterlambatan + " hari"
-            );
-
-            rincian += barisRincian(
-                "Denda (" + dendaHari + " × Rp10.000)",
-                formatRupiah(denda)
-            );
+            tambahRincian(detail, "TOTAL PEMBAYARAN", formatRupiah(total));
         }
 
-        rincian += barisRincian(
-            "TOTAL PEMBAYARAN",
-            formatRupiah(total)
-        );
+        // ======================================
+        // TEBUS GADAI: ATURAN BARU
+        // ======================================
+        else {
+            const diBawah3Juta = pokok < 3000000;
+
+            let kelipatanBunga = 0;
+            let hariDenda = 0;
+            let tahap = "";
+
+            if (tenor === 30) {
+                // --------------------------------
+                // MASA GADAI 30 HARI
+                // --------------------------------
+                if (diBawah3Juta) {
+                    // Denda dihitung dari hari pertama setelah jatuh tempo.
+                    hariDenda = terlambat;
+
+                    if (terlambat <= 15) {
+                        kelipatanBunga = 0;
+                        tahap = "Hari 1–15: pokok + denda.";
+                    } else if (terlambat <= 30) {
+                        kelipatanBunga = 1;
+                        tahap = "Hari 16–30: pokok + 1 × bunga 10% + denda.";
+                    } else {
+                        kelipatanBunga = 2;
+                        tahap = "Hari 31 ke atas: pokok + 2 × bunga 10% + denda.";
+                    }
+                } else {
+                    if (terlambat <= 15) {
+                        kelipatanBunga = 0;
+                        hariDenda = terlambat;
+                        tahap = "Hari 1–15: pokok + denda.";
+                    } else if (terlambat <= 30) {
+                        kelipatanBunga = 1;
+                        hariDenda = terlambat - 15;
+                        tahap =
+                            "Hari 16–30: pokok + 1 × bunga 10% + " +
+                            "denda mulai hari ke-16.";
+                    } else if (terlambat <= 60) {
+                        kelipatanBunga = 2;
+
+                        // Denda untuk hari ke-16 sampai ke-30
+                        // dalam setiap periode 30 hari keterlambatan.
+                        for (let hari = 1; hari <= terlambat; hari++) {
+                            const hariDalamPeriode = ((hari - 1) % 30) + 1;
+
+                            if (
+                                hariDalamPeriode >= 16 &&
+                                hariDalamPeriode <= 30
+                            ) {
+                                hariDenda++;
+                            }
+                        }
+
+                        tahap =
+                            "Hari 31–60: pokok + 2 × bunga 10% + " +
+                            "denda pada hari ke-16 sampai ke-30 setiap periode.";
+                    } else {
+                        tampilkanError(
+                            "Penebusan lebih dari 60 hari untuk pinjaman " +
+                            "Rp3.000.000 ke atas belum diatur dalam ketentuan " +
+                            "yang diberikan. Verifikasi ke outlet."
+                        );
+                        return;
+                    }
+                }
+            } else {
+                // --------------------------------
+                // MASA GADAI 15 HARI
+                // --------------------------------
+                if (diBawah3Juta) {
+                    // Denda sejak hari pertama keterlambatan.
+                    hariDenda = terlambat;
+
+                    if (terlambat <= 10) {
+                        kelipatanBunga = 0;
+                        tahap = "Hari 1–10: pokok + denda.";
+                    } else if (terlambat <= 15) {
+                        kelipatanBunga = 1;
+                        tahap = "Hari 11–15: pokok + 1 × bunga 5% + denda.";
+                    } else if (terlambat <= 30) {
+                        kelipatanBunga = 2;
+                        tahap = "Hari 16–30: pokok + 2 × bunga 5% + denda.";
+                    } else {
+                        kelipatanBunga = 3;
+                        tahap = "Hari 31 ke atas: pokok + 3 × bunga 5% + denda.";
+                    }
+                } else {
+                    if (terlambat <= 10) {
+                        kelipatanBunga = 0;
+                        hariDenda = terlambat;
+                        tahap = "Hari 1–10: pokok + denda.";
+                    } else if (terlambat <= 15) {
+                        kelipatanBunga = 1;
+                        hariDenda = terlambat - 10;
+                        tahap =
+                            "Hari 11–15: pokok + 1 × bunga 5% + " +
+                            "denda mulai hari ke-11.";
+                    } else if (terlambat <= 30) {
+                        kelipatanBunga = 2;
+                        hariDenda = terlambat - 10;
+                        tahap =
+                            "Hari 16–30: pokok + 2 × bunga 5% + " +
+                            "denda mulai hari ke-11.";
+                    } else {
+                        kelipatanBunga = 3;
+
+                        // Denda dibatasi sampai hari ke-30 keterlambatan,
+                        // dimulai dari hari ke-11.
+                        hariDenda = Math.min(terlambat - 10, 20);
+
+                        tahap =
+                            "Hari 31 ke atas: pokok + 3 × bunga 5% + " +
+                            "denda hari ke-11 sampai ke-30.";
+                    }
+                }
+            }
+
+            const bungaDikenakan = bunga * kelipatanBunga;
+            const denda = hariDenda * DENDA_PER_HARI;
+
+            total = pokok + bungaDikenakan + denda;
+            totalLabel = "Total Estimasi Tebus";
+            totalNote =
+                "Total terdiri dari pokok pinjaman, bunga sesuai tahap " +
+                "keterlambatan, dan denda sesuai ketentuan.";
+
+            tambahRincian(detail, "Jenis Transaksi", "Tebus Gadai");
+            tambahRincian(detail, "Masa Gadai", tenor + " hari kalender");
+            tambahRincian(
+                detail,
+                "Kategori Pinjaman",
+                diBawah3Juta
+                    ? "Di bawah Rp3.000.000"
+                    : "Rp3.000.000 ke atas"
+            );
+            tambahRincian(detail, "Pokok Pinjaman", formatRupiah(pokok));
+            tambahRincian(
+                detail,
+                "Jatuh Tempo",
+                formatTanggal(jatuhTempoAwal)
+            );
+            tambahRincian(
+                detail,
+                "Tanggal Penebusan",
+                formatTanggal(tanggalTransaksi)
+            );
+            tambahRincian(
+                detail,
+                "Hari Keterlambatan",
+                terlambat + " hari"
+            );
+            tambahRincian(detail, "Tahap Ketentuan", tahap);
+            tambahRincian(detail, "Bunga Dasar", formatRupiah(bunga));
+            tambahRincian(
+                detail,
+                "Kelipatan Bunga",
+                kelipatanBunga + " ×"
+            );
+            tambahRincian(
+                detail,
+                "Total Bunga",
+                formatRupiah(bungaDikenakan)
+            );
+            tambahRincian(
+                detail,
+                "Hari yang Dikenakan Denda",
+                hariDenda + " hari"
+            );
+            tambahRincian(detail, "Total Denda", formatRupiah(denda));
+            tambahRincian(detail, "TOTAL PEMBAYARAN", formatRupiah(total));
+
+            // Pengingat SMS lelang/jual sesuai aturan yang diberikan.
+            if (tenor === 30) {
+                tambahRincian(
+                    detail,
+                    "Jadwal SMS Lelang/Jual",
+                    "Hari ke-11 setelah jatuh tempo"
+                );
+            }
+        }
     }
 
     document.getElementById("judulHasil").textContent =
-        jenis === "gadai" ? "Rincian Gadai Baru" :
-        jenis === "tebus" ? "Rincian Tebus Gadai" :
-        "Rincian Perpanjangan";
+        jenis === "gadai"
+            ? "Rincian Gadai Baru"
+            : jenis === "tebus"
+                ? "Rincian Tebus Gadai"
+                : "Rincian Perpanjangan";
 
     document.getElementById("totalLabel").textContent = totalLabel;
     document.getElementById("totalValue").textContent = formatRupiah(total);
     document.getElementById("totalNote").textContent = totalNote;
-    document.getElementById("detail").innerHTML = rincian;
 
     resultCard.classList.add("show");
 
@@ -765,6 +819,5 @@ tanggalGadaiInput.value = tanggalLokalHariIni();
 tanggalTransaksiInput.value = tanggalLokalHariIni();
 ubahTransaksi();
 </script>
-
 </body>
 </html>
